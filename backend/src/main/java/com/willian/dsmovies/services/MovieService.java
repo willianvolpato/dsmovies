@@ -14,18 +14,18 @@ import com.willian.dsmovies.repositories.MovieRepository;
 public class MovieService {
 
 	@Autowired
-	private MovieRepository repository;
+	private MovieRepository movieRepository;
 
 	@Transactional(readOnly = true)
 	public Page<MovieDTO> findAll(Pageable pageable){
-		Page<Movie> pageResult = repository.findAll(pageable);
+		Page<Movie> pageResult = movieRepository.findAll(pageable);
 		
 		return pageResult.map(result -> new MovieDTO(result));
 	}
 
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long movieId){
-		Movie result = repository.findById(movieId).orElseThrow();
+		Movie result = movieRepository.findById(movieId).orElseThrow();
 		
 		return new MovieDTO(result);
 	}
